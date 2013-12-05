@@ -27,9 +27,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:svn://andy_jefferson@svn.code.sf.net/p/datanucleus/code/tools/maven2/trunk</connection>
-        <developerConnection>scm:svn:svn+ssh://andy_jefferson@svn.code.sf.net/p/datanucleus/code/tools/maven2/trunk</developerConnection>
-        <url>http://svn.code.sf.net/p/datanucleus/code/tools/maven2/trunk</url>
+        <connection>scm:git:git://github.com/datanucleus/datanucleus-maven-plugin.git</connection>
+        <url>scm:git:git://github.com/datanucleus/datanucleus-maven-plugin.git</url>
+        <developerConnection>scm:git:git://github.com/datanucleus/datanucleus-maven-plugin.git</developerConnection>
     </scm>
 
     <developers>
