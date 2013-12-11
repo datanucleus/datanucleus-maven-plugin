@@ -50,8 +50,8 @@ public class EnhancerMojo extends AbstractEnhancerMojo {
             // Output the enhanced classes to a different location
             if (fork)
             {
-                cl.createArgument().setValue("-d");
-                cl.createArgument().setValue(targetDirectory);
+                cl.createArg().setValue("-d");
+                cl.createArg().setValue(targetDirectory);
             }
             else
             {

@@ -40,7 +40,7 @@ public class SchemaToolInfoMojo extends AbstractSchemaToolMojo
     {
         if (fork)
         {
-            cl.createArgument().setValue(OPERATION_MODE_SCHEMA_INFO);
+            cl.createArg().setValue(OPERATION_MODE_SCHEMA_INFO);
         }
         else
         {

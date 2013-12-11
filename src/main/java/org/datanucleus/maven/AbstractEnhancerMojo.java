@@ -131,65 +131,65 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
             // uncomment the following if you want to debug the enhancer
             // cl.addArguments(new String[]{"-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"});
 
-            cl.createArgument().setValue("-cp");
-            cl.createArgument().setValue(cpBuffer.toString());
+            cl.createArg().setValue("-cp");
+            cl.createArg().setValue(cpBuffer.toString());
 
             // Logging - check for Log4j, else JDK1.4
             URL log4jURL = getLog4JConfiguration();
             if (log4jURL != null)
             {
-                cl.createArgument().setValue("-Dlog4j.configuration=" + log4jURL);
+                cl.createArg().setValue("-Dlog4j.configuration=" + log4jURL);
             }
             else
             {
                 URL jdkLogURL = getJdkLogConfiguration();
                 if (jdkLogURL != null)
                 {
-                    cl.createArgument().setValue("-Djava.util.logging.config.file=" + jdkLogURL);
+                    cl.createArg().setValue("-Djava.util.logging.config.file=" + jdkLogURL);
                 }
             }
 
-            cl.createArgument().setValue(TOOL_NAME_DATANUCLEUS_ENHANCER);
+            cl.createArg().setValue(TOOL_NAME_DATANUCLEUS_ENHANCER);
 
             // allow extensions to prepare Mode specific arguments
             prepareModeSpecificCommandLineArguments(cl, null);
 
             if (quiet)
             {
-                cl.createArgument().setValue("-q");
+                cl.createArg().setValue("-q");
             }
             else if (verbose)
             {
-                cl.createArgument().setValue("-v");
+                cl.createArg().setValue("-v");
             }
 
             boolean usingPU = false;
             if (persistenceUnitName != null && persistenceUnitName.trim().length() > 0)
             {
                 usingPU = true;
-                cl.createArgument().setLine("-pu " + persistenceUnitName);
+                cl.createArg().setLine("-pu " + persistenceUnitName);
             }
 
-            cl.createArgument().setLine("-api " + api);
+            cl.createArg().setLine("-api " + api);
 
             if (alwaysDetachable)
             {
-                cl.createArgument().setValue("-alwaysDetachable");
+                cl.createArg().setValue("-alwaysDetachable");
             }
 
             if (!generatePK)
             {
-                cl.createArgument().setLine("-generatePK false");
+                cl.createArg().setLine("-generatePK false");
             }
 
             if (!generateConstructor)
             {
-                cl.createArgument().setLine("-generateConstructor false");
+                cl.createArg().setLine("-generateConstructor false");
             }
 
             if (detachListener)
             {
-                cl.createArgument().setLine("-detachListener true");
+                cl.createArg().setLine("-detachListener true");
             }
 
             if (!usingPU)
@@ -197,7 +197,7 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
                 for (Iterator it = files.iterator(); it.hasNext();)
                 {
                     File file = (File) it.next();
-                    cl.createArgument().setValue(file.getAbsolutePath());
+                    cl.createArg().setValue(file.getAbsolutePath());
                 }
             }
 

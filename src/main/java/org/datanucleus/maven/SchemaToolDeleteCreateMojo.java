@@ -39,19 +39,19 @@ public class SchemaToolDeleteCreateMojo extends AbstractSchemaToolMojo
     {
         if (fork)
         {
-            cl.createArgument().setValue(OPERATION_MODE_DELETECREATE);
+            cl.createArg().setValue(OPERATION_MODE_DELETECREATE);
             if (ddlFile != null && ddlFile.trim().length() > 0)
             {
-                cl.createArgument().setValue("-ddlFile");
-                cl.createArgument().setValue(ddlFile);
+                cl.createArg().setValue("-ddlFile");
+                cl.createArg().setValue(ddlFile);
             }
             if (completeDdl)
             {
-                cl.createArgument().setValue("-completeDdl");
+                cl.createArg().setValue("-completeDdl");
             }
             if (includeAutoStart)
             {
-                cl.createArgument().setValue("-includeAutoStart");
+                cl.createArg().setValue("-includeAutoStart");
             }
         }
         else

@@ -43,7 +43,7 @@ public class EnhancerCheckMojo extends AbstractEnhancerMojo
         // Use "checkonly" mode
         if (fork)
         {
-            cl.createArgument().setValue("-checkonly");
+            cl.createArg().setValue("-checkonly");
         }
         else
         {

@@ -190,8 +190,8 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
             Commandline cl = new Commandline();
             cl.setExecutable("java");
 
-            cl.createArgument().setValue("-cp");
-            cl.createArgument().setValue(cpBuffer.toString());
+            cl.createArg().setValue("-cp");
+            cl.createArg().setValue(cpBuffer.toString());
 
             // Obtain list of system properties to apply (System props override POM props)
             Properties systemProperties = System.getProperties();
@@ -212,7 +212,7 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
                 {
                     String key = (String) it.next();
                     String val = (null != toolProperties.getProperty(key) ? toolProperties.getProperty(key) : "");
-                    cl.createArgument().setValue("-D" + key + "=" + val);
+                    cl.createArg().setValue("-D" + key + "=" + val);
                 }
             }
 
@@ -220,39 +220,39 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
             URL log4jURL = getLog4JConfiguration();
             if (log4jURL != null)
             {
-                cl.createArgument().setValue("-Dlog4j.configuration=" + log4jURL);
+                cl.createArg().setValue("-Dlog4j.configuration=" + log4jURL);
             }
             else
             {
                 URL jdkLogURL = getJdkLogConfiguration();
                 if (jdkLogURL != null)
                 {
-                    cl.createArgument().setValue("-Djava.util.logging.config.file=" + jdkLogURL);
+                    cl.createArg().setValue("-Djava.util.logging.config.file=" + jdkLogURL);
                 }
             }
 
-            cl.createArgument().setValue(TOOL_NAME_SCHEMA_TOOL);
+            cl.createArg().setValue(TOOL_NAME_SCHEMA_TOOL);
 
             // allow extensions to prepare Mode specific arguments
             prepareModeSpecificCommandLineArguments(cl, null);
 
             if (verbose)
             {
-                cl.createArgument().setValue("-v");
+                cl.createArg().setValue("-v");
             }
 
             boolean usingPU = false;
             if (persistenceUnitName != null && persistenceUnitName.trim().length() > 0)
             {
                 usingPU = true;
-                cl.createArgument().setLine("-pu " + persistenceUnitName);
+                cl.createArg().setLine("-pu " + persistenceUnitName);
             }
 
-            cl.createArgument().setLine("-api " + api);
+            cl.createArg().setLine("-api " + api);
 
             if (props != null)
             {
-                cl.createArgument().setLine("-props " + props);
+                cl.createArg().setLine("-props " + props);
             }
 
             if (!usingPU)
@@ -260,7 +260,7 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
                 for (Iterator it = files.iterator(); it.hasNext();)
                 {
                     File file = (File) it.next();
-                    cl.createArgument().setValue(file.getAbsolutePath());
+                    cl.createArg().setValue(file.getAbsolutePath());
                 }
             }
 
