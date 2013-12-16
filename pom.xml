@@ -8,7 +8,7 @@
     <groupId>org.datanucleus</groupId>
     <artifactId>datanucleus-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <name>DataNucleus Maven2 Plugin</name>
+    <name>DataNucleus Maven Plugin</name>
     <version>3.3.2-SNAPSHOT</version>
     <description>
         DataNucleus Maven plugin providing access to Enhancer and SchemaTool via Maven.
@@ -27,9 +27,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/datanucleus/datanucleus-maven-plugin.git</connection>
-        <url>scm:git:git://github.com/datanucleus/datanucleus-maven-plugin.git</url>
-        <developerConnection>scm:git:git://github.com/datanucleus/datanucleus-maven-plugin.git</developerConnection>
+        <connection>scm:git:git@github.com:datanucleus/datanucleus-maven-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:datanucleus/datanucleus-maven-plugin.git</developerConnection>
+        <url>https://github.com/datanucleus/datanucleus-maven-plugin</url>
     </scm>
 
     <developers>
