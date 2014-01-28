@@ -4,11 +4,11 @@
     <parent>
         <groupId>org.datanucleus</groupId>
         <artifactId>datanucleus-maven-parent</artifactId>
-        <version>3.3</version>
+        <version>4.0.0</version>
     </parent>
 
     <artifactId>datanucleus-maven-plugin</artifactId>
-    <version>3.3.3-SNAPSHOT</version>
+    <version>4.0.0-m1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>DataNucleus Maven Plugin</name>
@@ -22,7 +22,6 @@
     </scm>
 
     <build>
-        
         <resources>
             <resource>
                 <!-- TODO Remove after upgrading 3.3.1 -->
@@ -46,12 +45,11 @@
     </build>
 
     <dependencies>
-        <!-- Assumed to be provided by users own POM (along with api-jdo/api-jpa 
-            and any store plugin when using SchemaTool) -->
+        <!-- Assumed to be provided by users own POM (along with api-jdo/api-jpa  and any store plugin when using SchemaTool) -->
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-core</artifactId>
-            <version>[3.2.0.release, )</version>
+            <version>[3.9.9, )</version>
             <scope>provided</scope>
         </dependency>
 
@@ -94,5 +92,4 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
 </project>
