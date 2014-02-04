@@ -104,6 +104,12 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
     private Properties toolProperties;
 
     /**
+     * Schema name (to be used with "createSchema"/"deleteSchema" modes).
+     * @parameter expression="${schemaName}" default-value=""
+     */
+    protected String schemaName;
+
+    /**
      * File to which DDL SQL is written.
      * @parameter expression="${ddlFile}" default-value=""
      */
