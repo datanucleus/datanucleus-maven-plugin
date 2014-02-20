@@ -217,7 +217,7 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
                 for (Iterator it = toolPropertyKeys.iterator(); it.hasNext();)
                 {
                     String key = (String) it.next();
-                    String val = (null != toolProperties.getProperty(key) ? toolProperties.getProperty(key) : "");
+                    String val = (toolProperties.getProperty(key) != null ? toolProperties.getProperty(key) : "");
                     cl.createArg().setValue("-D" + key + "=" + val);
                 }
             }

@@ -106,14 +106,13 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
     {
         if (!metadataDirectory.exists())
         {
-        	getLog().warn("No files to run DataNucleus tool '" + getToolName() + "'" +
-        	    " since specified metadata directory '" + metadataDirectory.getAbsolutePath() + "'" +
-        	    " is not available.");
+            getLog().warn("No files to run DataNucleus tool '" + getToolName() + "'" +
+                " since specified metadata directory '" + metadataDirectory.getAbsolutePath() + "' is not available.");
         	return;
         }
 
         List files = findMetadataFiles();
-        if (files.size() == 0)
+        if (files.isEmpty())
         {
             getLog().warn("No files to run DataNucleus tool '" + getToolName() + "'");
             return;
@@ -140,7 +139,7 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
         if (log4jConfiguration != null)
         {
             URL log4jURL = this.getClass().getResource(log4jConfiguration);
-            if (log4jURL == null && log4jConfiguration != null)
+            if (log4jURL == null)
             {
                 try
                 {
@@ -148,7 +147,7 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
                 }
                 catch (MalformedURLException mue)
                 {
-                    // TODO Throw exception?
+                    throw new IllegalArgumentException("Log4J Configuration is incorrect", mue);
                 }
             }
             return log4jURL;
@@ -165,7 +164,7 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
         if (jdkLogConfiguration != null)
         {
             URL jdkLogURL = this.getClass().getResource(jdkLogConfiguration);
-            if (jdkLogURL == null && jdkLogConfiguration != null)
+            if (jdkLogURL == null)
             {
                 try
                 {
@@ -173,7 +172,7 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
                 }
                 catch (MalformedURLException mue)
                 {
-                    // TODO Throw exception?
+                    throw new IllegalArgumentException("java.util.logging Configuration is incorrect", mue);
                 }
             }
             return jdkLogURL;
