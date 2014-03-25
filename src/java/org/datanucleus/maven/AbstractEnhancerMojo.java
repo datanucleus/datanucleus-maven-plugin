@@ -18,9 +18,12 @@ Contributors:
 package org.datanucleus.maven;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,6 +31,7 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.codehaus.plexus.util.cli.CommandLineException;
 import org.codehaus.plexus.util.cli.Commandline;
+import org.datanucleus.store.schema.SchemaTool;
 
 /**
  * Base for all enhancer-based Maven2 goals.
@@ -62,10 +66,16 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
     protected boolean detachListener;
 
     /**
+     * @parameter expression="${useFileListFile}" default-value="auto"
+     */
+    protected String useFileListFile;
+
+    /**
      * Method to execute the enhancer using the provided artifacts and input files.
      * @param pluginArtifacts Artifacts to use in CLASSPATH generation
      * @param files Input files
      */
+    @Override
     protected void executeDataNucleusTool(List pluginArtifacts, List files)
     throws CommandLineException, MojoExecutionException
     {
@@ -194,10 +204,16 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
 
             if (!usingPU)
             {
-                for (Iterator it = files.iterator(); it.hasNext();)
-                {
-                    File file = (File) it.next();
-                    cl.createArg().setValue(file.getAbsolutePath());
+                if (determineUseFileListFile()) {
+                    File fileListFile = writeFileListFile(files);
+                    cl.createArg().setLine("-flf \"" + fileListFile.getAbsolutePath() + '"');
+                }
+                else {
+                    for (Iterator it = files.iterator(); it.hasNext();)
+                    {
+                        File file = (File) it.next();
+                        cl.createArg().setValue(file.getAbsolutePath());
+                    }
                 }
             }
 
@@ -279,8 +295,59 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
      * Accessor for the name of the class to be invoked.
      * @return Class name for the Enhancer.
      */
+    @Override
     protected String getToolName()
     {
         return TOOL_NAME_DATANUCLEUS_ENHANCER;
+    }
+
+    protected boolean determineUseFileListFile() {
+        if (useFileListFile != null) {
+            if ("true".equalsIgnoreCase(useFileListFile))
+                return true;
+            else if ("false".equalsIgnoreCase(useFileListFile))
+                return false;
+            else if ("auto".equalsIgnoreCase(useFileListFile))
+                ; // simply ignore the warning below ;-)
+            else
+                System.err.println("WARNING: useFileListFile is an unknown value! Falling back to default!");
+        }
+        // 'auto' means true on Windows and false on other systems. Maybe we'll change this in the
+        // future to always be true as the command line might be limited on other systems, too.
+        // See: http://www.cyberciti.biz/faq/argument-list-too-long-error-solution/
+        // See: http://serverfault.com/questions/69430/what-is-the-maximum-length-of-a-command-line-in-mac-os-x
+        return File.separatorChar == '\\';
+    }
+
+    /**
+     * Writes the given {@code files} into a temporary file. The file is deleted by the enhancer.
+     *
+     * @param files the list of files to be written into the file (UTF-8-encoded). Must not be <code>null</code>.
+     * @return the temporary file.
+     */
+    private static File writeFileListFile(Collection<File> files) {
+        try {
+            File fileListFile = File.createTempFile("enhancer-", ".flf");
+            System.out.println("Writing fileListFile: " + fileListFile);
+            FileOutputStream out = new FileOutputStream(fileListFile);
+            try {
+                OutputStreamWriter w = new OutputStreamWriter(out, "UTF-8");
+                try {
+                    for (File file : files) {
+                        w.write(file.getAbsolutePath());
+                        // The enhancer uses a BufferedReader, which accepts all types of line feeds (CR, LF, CRLF).
+                        // Therefore a single \n is fine.
+                        w.write('\n');
+                    }
+                } finally {
+                    w.close();
+                }
+            } finally {
+                out.close();
+            }
+            return fileListFile;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
