@@ -301,16 +301,22 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
         return TOOL_NAME_DATANUCLEUS_ENHANCER;
     }
 
-    protected boolean determineUseFileListFile() {
-        if (useFileListFile != null) {
+    protected boolean determineUseFileListFile()
+    {
+        if (useFileListFile != null)
+        {
             if ("true".equalsIgnoreCase(useFileListFile))
+            {
                 return true;
+            }
             else if ("false".equalsIgnoreCase(useFileListFile))
+            {
                 return false;
-            else if ("auto".equalsIgnoreCase(useFileListFile))
-                ; // simply ignore the warning below ;-)
-            else
+            }
+            else if (!"auto".equalsIgnoreCase(useFileListFile))
+            {
                 System.err.println("WARNING: useFileListFile is an unknown value! Falling back to default!");
+            }
         }
         // 'auto' means true on Windows and false on other systems. Maybe we'll change this in the
         // future to always be true as the command line might be limited on other systems, too.
@@ -321,32 +327,44 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
 
     /**
      * Writes the given {@code files} into a temporary file. The file is deleted by the enhancer.
-     *
-     * @param files the list of files to be written into the file (UTF-8-encoded). Must not be <code>null</code>.
+     * @param files the list of files to be written into the file (UTF-8-encoded). Must not be
+     * <code>null</code>.
      * @return the temporary file.
      */
-    private static File writeFileListFile(Collection<File> files) {
-        try {
+    private static File writeFileListFile(Collection<File> files)
+    {
+        try
+        {
             File fileListFile = File.createTempFile("enhancer-", ".flf");
             System.out.println("Writing fileListFile: " + fileListFile);
             FileOutputStream out = new FileOutputStream(fileListFile);
-            try {
+            try
+            {
                 OutputStreamWriter w = new OutputStreamWriter(out, "UTF-8");
-                try {
-                    for (File file : files) {
+                try
+                {
+                    for (File file : files)
+                    {
                         w.write(file.getAbsolutePath());
-                        // The enhancer uses a BufferedReader, which accepts all types of line feeds (CR, LF, CRLF).
+                        // The enhancer uses a BufferedReader, which accepts all types of line feeds (CR, LF,
+                        // CRLF).
                         // Therefore a single \n is fine.
                         w.write('\n');
                     }
-                } finally {
+                }
+                finally
+                {
                     w.close();
                 }
-            } finally {
+            }
+            finally
+            {
                 out.close();
             }
             return fileListFile;
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             throw new RuntimeException(e);
         }
     }
