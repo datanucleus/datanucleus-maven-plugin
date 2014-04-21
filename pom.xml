@@ -58,6 +58,7 @@
             <artifactId>jdo-api</artifactId>
             <version>[3.0.1, )</version>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
