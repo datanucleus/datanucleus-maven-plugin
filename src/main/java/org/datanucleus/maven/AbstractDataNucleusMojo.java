@@ -100,7 +100,7 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
 
     /**
      * Method to execute a goal.
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException If an error occurs in execution
      */
     public void execute() throws MojoExecutionException
     {
@@ -232,9 +232,8 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
 
     /**
      * Template method expected to be implemented by extensions. This acts as hook to invoke custom DataNucleus tool.
-     * @param pluginArtifacts
-     * @param log4jProperties
-     * @param files
+     * @param pluginArtifacts The artifacts
+     * @param files The files
      */
     protected abstract void executeDataNucleusTool(List pluginArtifacts, List files)
     throws CommandLineException, MojoExecutionException;

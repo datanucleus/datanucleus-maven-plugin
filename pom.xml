@@ -30,6 +30,14 @@
                     <archive combine.self="override" />
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <!-- This turns off some new JDK8 'feature' called "doclint" which renders Javadoc impossible to create. -->
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

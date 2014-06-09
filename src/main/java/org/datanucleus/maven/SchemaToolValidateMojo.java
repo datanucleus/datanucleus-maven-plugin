@@ -34,7 +34,7 @@ public class SchemaToolValidateMojo extends AbstractSchemaToolMojo
     /**
      * {@inheritDoc}
      * 
-     * @see org.datanucleus.maven.AbstractSchemaToolMojo#prepareModeSpecificCommandLineArguments(org.codehaus.plexus.util.cli.Commandline)
+     * @see org.datanucleus.maven.AbstractSchemaToolMojo#prepareModeSpecificCommandLineArguments(org.codehaus.plexus.util.cli.Commandline, java.util.List)
      */
     protected void prepareModeSpecificCommandLineArguments(Commandline cl, List args)
     {
