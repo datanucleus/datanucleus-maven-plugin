@@ -190,7 +190,7 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
         {
             // Create a CommandLine for execution
             Commandline cl = new Commandline();
-            cl.setExecutable("java");
+            cl.setExecutable(new File(new File(System.getProperty("java.home"), "bin"), "java").getAbsolutePath());
 
             cl.createArg().setValue("-cp");
             cl.createArg().setValue(cpBuffer.toString());
