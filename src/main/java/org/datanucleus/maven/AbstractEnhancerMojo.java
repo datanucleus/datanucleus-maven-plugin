@@ -135,7 +135,7 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
         {
             // Create a CommandLine for execution
             Commandline cl = new Commandline();
-            cl.setExecutable("java");
+            cl.setExecutable(new File(new File(System.getProperty("java.home"), "bin"), "java").getAbsolutePath());
 
             // uncomment the following if you want to debug the enhancer
             // cl.addArguments(new String[]{"-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"});
