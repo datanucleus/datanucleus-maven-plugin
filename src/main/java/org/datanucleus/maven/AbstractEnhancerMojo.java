@@ -50,6 +50,11 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
     protected boolean alwaysDetachable;
 
     /**
+     * @parameter expression="${ignoreMissingClassesWithMetadata}" default-value="false"
+     */
+    protected boolean ignoreMetaDataForMissingClasses;
+
+    /**
      * @parameter expression="${generatePK}" default-value="true"
      */
     protected boolean generatePK;
@@ -185,6 +190,10 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
             {
                 cl.createArg().setValue("-alwaysDetachable");
             }
+            if (ignoreMetaDataForMissingClasses)
+            {
+                cl.createArg().setValue("-ignoreMetaDataForMissingClasses");
+            }
 
             if (!generatePK)
             {
@@ -249,6 +258,10 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
             if (alwaysDetachable)
             {
                 args.add("-alwaysDetachable");
+            }
+            if (ignoreMetaDataForMissingClasses)
+            {
+                args.add("-ignoreMetaDataForMissingClasses");
             }
 
             if (!generatePK)
