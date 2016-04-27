@@ -50,11 +50,6 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
     protected boolean alwaysDetachable;
 
     /**
-     * @parameter expression="${ignoreMissingClassesWithMetadata}" default-value="false"
-     */
-    protected boolean ignoreMetaDataForMissingClasses;
-
-    /**
      * @parameter expression="${generatePK}" default-value="true"
      */
     protected boolean generatePK;

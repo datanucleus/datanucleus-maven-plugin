@@ -57,6 +57,11 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
     protected String metadataExcludes;
 
     /**
+     * @parameter expression="${ignoreMetaDataForMissingClasses}" default-value="false"
+     */
+    protected boolean ignoreMetaDataForMissingClasses;
+
+    /**
      * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
      * @required
      */
