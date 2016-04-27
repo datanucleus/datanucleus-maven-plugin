@@ -249,6 +249,10 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
                 usingPU = true;
                 cl.createArg().setLine("-pu " + persistenceUnitName);
             }
+            if (ignoreMetaDataForMissingClasses)
+            {
+                cl.createArg().setValue("-ignoreMetaDataForMissingClasses");
+            }
 
             cl.createArg().setLine("-api " + api);
 
@@ -287,6 +291,10 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
                 usingPU = true;
                 args.add("-pu");
                 args.add(persistenceUnitName);
+            }
+            if (ignoreMetaDataForMissingClasses)
+            {
+                args.add("-ignoreMetaDataForMissingClasses");
             }
 
             args.add("-api");
