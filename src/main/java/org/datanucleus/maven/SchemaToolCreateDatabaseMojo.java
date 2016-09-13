@@ -22,14 +22,14 @@ import java.util.List;
 import org.codehaus.plexus.util.cli.Commandline;
 
 /**
- * Deletes the schema specified by the "schemaName" parameter.
- * @goal schema-deleteschema
+ * Generates the database specified by the catalogName/schemaName parameters.
+ * @goal schema-createdatabase
  * @requiresDependencyResolution runtime
- * @description Deletes the datastore schema for the specified schemaName.
+ * @description Creates the database for the specified catalogName/schemaName.
  */
-public class SchemaToolDeleteSchemaMojo extends AbstractSchemaToolMojo
+public class SchemaToolCreateDatabaseMojo extends AbstractSchemaToolMojo
 {
-    private static final String OPERATION_MODE_DELETE = "-deleteSchema";
+    private static final String OPERATION_MODE_CREATE = "-createDatabase";
 
     /**
      * {@inheritDoc}
@@ -39,13 +39,31 @@ public class SchemaToolDeleteSchemaMojo extends AbstractSchemaToolMojo
     {
         if (fork)
         {
-            cl.createArg().setValue(OPERATION_MODE_DELETE);
-            cl.createArg().setValue(schemaName);
+            cl.createArg().setValue(OPERATION_MODE_CREATE);
+
+            if (catalogName != null && !catalogName.isEmpty())
+            {
+                cl.createArg().setLine("-catalog " + catalogName);
+            }
+            if (schemaName != null && !schemaName.isEmpty())
+            {
+                cl.createArg().setLine("-schema " + schemaName);
+            }
         }
         else
         {
-            args.add(OPERATION_MODE_DELETE);
-            args.add(schemaName);
+            args.add(OPERATION_MODE_CREATE);
+
+            if (catalogName != null && !catalogName.isEmpty())
+            {
+                args.add("-catalog");
+                args.add(catalogName);
+            }
+            if (schemaName != null && !schemaName.isEmpty())
+            {
+                args.add("-schema");
+                args.add(schemaName);
+            }
         }
     }
 }
