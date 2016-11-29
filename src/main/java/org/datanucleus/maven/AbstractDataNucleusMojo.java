@@ -61,8 +61,6 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
      */
     protected boolean ignoreMetaDataForMissingClasses;
 
-    abstract List getClasspathElements();
-
     /**
      * @parameter expression="${plugin.artifacts}"
      * @required
@@ -98,6 +96,8 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
      * @parameter expression="${api}" default-value="JDO"
      */
     protected String api;
+
+    abstract List getClasspathElements();
 
     /**
      * Method to execute a goal.

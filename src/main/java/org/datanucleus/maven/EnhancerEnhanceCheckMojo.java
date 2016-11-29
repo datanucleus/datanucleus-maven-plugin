@@ -24,7 +24,6 @@ import java.util.List;
 
 /**
  * Goal to check the enhancement status of the provided classes.
- *
  * @goal enhance-check
  * @phase process-classes
  * @requiresDependencyResolution compile
@@ -32,7 +31,6 @@ import java.util.List;
  */
 public class EnhancerEnhanceCheckMojo extends AbstractEnhancerCheckMojo
 {
-
     /**
      * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
      * @required
@@ -40,8 +38,8 @@ public class EnhancerEnhanceCheckMojo extends AbstractEnhancerCheckMojo
     private List classpathElements;
 
     @Override
-    List getClasspathElements() {
+    List getClasspathElements() 
+    {
         return classpathElements;
     }
-
 }

@@ -26,8 +26,7 @@ import org.codehaus.plexus.util.cli.Commandline;
 public abstract class AbstractEnhancerCheckMojo extends AbstractEnhancerMojo
 {
     /**
-     * Method to add on any additional command line arguments for this mode of invoking the
-     * DataNucleus Enhancer.
+     * Method to add on any additional command line arguments for this mode of invoking the DataNucleus Enhancer.
      * @param cl The current CommandLine
      * @param args Args that will be updated with anything appended here
      */

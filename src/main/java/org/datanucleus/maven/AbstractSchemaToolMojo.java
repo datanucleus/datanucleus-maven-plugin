@@ -129,6 +129,18 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
     protected boolean includeAutoStart;
 
     /**
+     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
+     * @required
+     */
+    private List classpathElements;
+
+    @Override
+    List getClasspathElements()
+    {
+        return classpathElements;
+    }
+
+    /**
      * {@inheritDoc}
      * @see org.datanucleus.maven.AbstractDataNucleusMojo#executeDataNucleusTool(java.util.List, java.util.List)
      */

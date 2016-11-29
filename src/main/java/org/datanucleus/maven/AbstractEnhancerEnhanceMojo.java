@@ -28,7 +28,6 @@ public abstract class AbstractEnhancerEnhanceMojo extends AbstractEnhancerMojo
      */
     private String targetDirectory;
 
-
     /**
      * Method to add on any additional command line arguments for this mode of invoking the
      * DataNucleus Enhancer.

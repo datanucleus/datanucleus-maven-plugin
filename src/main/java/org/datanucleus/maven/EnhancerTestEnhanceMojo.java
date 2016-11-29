@@ -22,22 +22,21 @@ import java.util.List;
 
 /**
  * Goal to enhance the provided classes as per the input file definition.
- *
  * @goal test-enhance
  * @phase process-test-classes
  * @requiresDependencyResolution test
  * @description Enhances the input classes.
  */
-public class EnhancerTestEnhanceMojo extends AbstractEnhancerEnhanceMojo {
-
+public class EnhancerTestEnhanceMojo extends AbstractEnhancerEnhanceMojo 
+{
     /**
      * @parameter expression="${classpath}" default-value="${project.testClasspathElements}"
      */
     private List classpathElements;
 
     @Override
-    List getClasspathElements() {
+    List getClasspathElements() 
+    {
         return classpathElements;
     }
-
 }

@@ -23,14 +23,13 @@ import java.util.List;
 
 /**
  * Goal to enhance the provided classes as per the input file definition.
- *
  * @goal enhance
  * @phase process-classes
  * @requiresDependencyResolution compile
  * @description Enhances the input classes.
  */
-public class EnhancerEnhanceMojo extends AbstractEnhancerEnhanceMojo {
-
+public class EnhancerEnhanceMojo extends AbstractEnhancerEnhanceMojo 
+{
     /**
      * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
      * @required
@@ -38,9 +37,8 @@ public class EnhancerEnhanceMojo extends AbstractEnhancerEnhanceMojo {
     private List classpathElements;
 
     @Override
-    List getClasspathElements() {
+    List getClasspathElements() 
+    {
         return classpathElements;
     }
-
-
 }
