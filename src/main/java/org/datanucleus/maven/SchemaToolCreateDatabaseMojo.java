@@ -32,6 +32,20 @@ public class SchemaToolCreateDatabaseMojo extends AbstractSchemaToolMojo
     private static final String OPERATION_MODE_CREATE = "-createDatabase";
 
     /**
+     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
+     * @required
+     */
+    private List classpathElements;
+
+    @Override
+    List getClasspathElements() {
+        return classpathElements;
+    }
+
+
+
+
+    /**
      * {@inheritDoc}
      * @see org.datanucleus.maven.AbstractSchemaToolMojo#prepareModeSpecificCommandLineArguments(org.codehaus.plexus.util.cli.Commandline, java.util.List)
      */

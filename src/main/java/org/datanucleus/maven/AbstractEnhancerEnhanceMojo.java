@@ -1,5 +1,5 @@
 /**********************************************************************
-Copyright (c) 2005 Rahul Thakur and others. All rights reserved.
+Copyright (c) 2007 Andy Jefferson and others. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -13,9 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 Contributors:
-2007 Andy Jefferson - split out base class for all enhancer modes.
-2011 Marco หงุ่ยตระกูล-Schulze - changed "@requiresDependencyResolution" to "compile"
-    ...
+ 2016 Dan Haywood - https://github.com/datanucleus/datanucleus-maven-plugin/issues/5
 **********************************************************************/
 package org.datanucleus.maven;
 
@@ -23,15 +21,14 @@ import java.util.List;
 
 import org.codehaus.plexus.util.cli.Commandline;
 
-/**
- * Goal to check the enhancement status of the provided classes.
- * @goal enhance-check
- * @phase process-classes
- * @requiresDependencyResolution compile
- * @description Checks the enhancement of the input classes.
- */
-public class EnhancerCheckMojo extends AbstractEnhancerMojo
+public abstract class AbstractEnhancerEnhanceMojo extends AbstractEnhancerMojo
 {
+    /**
+     * @parameter expression="${targetDirectory}" default-value=""
+     */
+    private String targetDirectory;
+
+
     /**
      * Method to add on any additional command line arguments for this mode of invoking the
      * DataNucleus Enhancer.
@@ -40,14 +37,20 @@ public class EnhancerCheckMojo extends AbstractEnhancerMojo
      */
     protected void prepareModeSpecificCommandLineArguments(Commandline cl, List args)
     {
-        // Use "checkonly" mode
-        if (fork)
+        if (targetDirectory != null && targetDirectory.trim().length() > 0)
         {
-            cl.createArg().setValue("-checkonly");
-        }
-        else
-        {
-            args.add("-checkonly");
+            // Output the enhanced classes to a different location
+            if (fork)
+            {
+                cl.createArg().setValue("-d");
+                cl.createArg().setValue(targetDirectory);
+            }
+            else
+            {
+                args.add("-d");
+                args.add(targetDirectory);
+            }
         }
     }
+
 }

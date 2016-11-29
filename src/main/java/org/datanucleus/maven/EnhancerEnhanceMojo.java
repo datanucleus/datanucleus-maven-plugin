@@ -21,8 +21,6 @@ package org.datanucleus.maven;
 
 import java.util.List;
 
-import org.codehaus.plexus.util.cli.Commandline;
-
 /**
  * Goal to enhance the provided classes as per the input file definition.
  *
@@ -31,33 +29,18 @@ import org.codehaus.plexus.util.cli.Commandline;
  * @requiresDependencyResolution compile
  * @description Enhances the input classes.
  */
-public class EnhancerMojo extends AbstractEnhancerMojo {
-    /**
-     * @parameter expression="${targetDirectory}" default-value=""
-     */
-    private String targetDirectory;
+public class EnhancerEnhanceMojo extends AbstractEnhancerEnhanceMojo {
 
     /**
-     * Method to add on any additional command line arguments for this mode of invoking the
-     * DataNucleus Enhancer.
-     * @param cl The current CommandLine
-     * @param args Args that will be updated with anything appended here
+     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
+     * @required
      */
-    protected void prepareModeSpecificCommandLineArguments(Commandline cl, List args)
-    {
-        if (targetDirectory != null && targetDirectory.trim().length() > 0)
-        {
-            // Output the enhanced classes to a different location
-            if (fork)
-            {
-                cl.createArg().setValue("-d");
-                cl.createArg().setValue(targetDirectory);
-            }
-            else
-            {
-                args.add("-d");
-                args.add(targetDirectory);
-            }
-        }
+    private List classpathElements;
+
+    @Override
+    List getClasspathElements() {
+        return classpathElements;
     }
+
+
 }
