@@ -22,14 +22,27 @@ import java.util.List;
 import org.codehaus.plexus.util.cli.Commandline;
 
 /**
- * Deletes the schema specified by the "schemaName" parameter.
- * @goal schema-deleteschema
+ * Deletes the database specified by the catalogName/schemaName parameters.
+ * @goal schema-deletedatabase
  * @requiresDependencyResolution runtime
- * @description Deletes the datastore schema for the specified schemaName.
+ * @description Deletes the database for the specified catalogName/schemaName.
  */
-public class SchemaToolDeleteSchemaMojo extends AbstractSchemaToolMojo
+public class SchemaToolDeleteDatabaseMojo extends AbstractSchemaToolMojo
 {
-    private static final String OPERATION_MODE_DELETE = "-deleteSchema";
+    private static final String OPERATION_MODE_DELETE = "-deleteDatabase";
+
+    /**
+     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
+     * @required
+     */
+    private List classpathElements;
+
+    @Override
+    List getClasspathElements() {
+        return classpathElements;
+    }
+
+
 
     /**
      * {@inheritDoc}
@@ -40,12 +53,30 @@ public class SchemaToolDeleteSchemaMojo extends AbstractSchemaToolMojo
         if (fork)
         {
             cl.createArg().setValue(OPERATION_MODE_DELETE);
-            cl.createArg().setValue(schemaName);
+
+            if (catalogName != null && !catalogName.isEmpty())
+            {
+                cl.createArg().setLine("-catalog " + catalogName);
+            }
+            if (schemaName != null && !schemaName.isEmpty())
+            {
+                cl.createArg().setLine("-schema " + schemaName);
+            }
         }
         else
         {
             args.add(OPERATION_MODE_DELETE);
-            args.add(schemaName);
+
+            if (catalogName != null && !catalogName.isEmpty())
+            {
+                args.add("-catalog");
+                args.add(catalogName);
+            }
+            if (schemaName != null && !schemaName.isEmpty())
+            {
+                args.add("-schema");
+                args.add(schemaName);
+            }
         }
     }
 }

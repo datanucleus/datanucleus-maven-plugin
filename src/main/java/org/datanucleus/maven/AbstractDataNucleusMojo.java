@@ -61,11 +61,7 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
      */
     protected boolean ignoreMetaDataForMissingClasses;
 
-    /**
-     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
-     * @required
-     */
-    private List classpathElements;
+    abstract List getClasspathElements();
 
     /**
      * @parameter expression="${plugin.artifacts}"
@@ -223,7 +219,8 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
     {
         List ret = new ArrayList();
         ret.add(this.metadataDirectory.getAbsolutePath());
-        Iterator it = classpathElements.iterator();
+        Iterator it = getClasspathElements().iterator();
+
         while (it.hasNext())
         {
             String pathelem = (String) it.next();

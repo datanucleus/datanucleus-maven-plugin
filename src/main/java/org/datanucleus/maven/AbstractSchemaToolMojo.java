@@ -101,7 +101,13 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
     private Properties toolProperties;
 
     /**
-     * Schema name (to be used with "createSchema"/"deleteSchema" modes).
+     * Catalog name (to be used with "createDatabase"/"deleteDatabase" modes).
+     * @parameter expression="${catalogName}" default-value=""
+     */
+    protected String catalogName;
+
+    /**
+     * Schema name (to be used with "createDatabase"/"deleteDatabase" modes).
      * @parameter expression="${schemaName}" default-value=""
      */
     protected String schemaName;

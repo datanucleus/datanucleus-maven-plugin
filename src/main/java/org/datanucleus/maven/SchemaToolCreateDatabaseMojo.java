@@ -1,5 +1,5 @@
 /**********************************************************************
-Copyright (c) 2012 Andy Jefferson and others. All rights reserved.
+Copyright (c) 2014 Andy Jefferson and others. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -22,14 +22,14 @@ import java.util.List;
 import org.codehaus.plexus.util.cli.Commandline;
 
 /**
- * Drop and create the Schema defined by the input files.
- * @goal schema-deletecreate
+ * Generates the database specified by the catalogName/schemaName parameters.
+ * @goal schema-createdatabase
  * @requiresDependencyResolution runtime
- * @description Drops and creates the datastore Schema for the specified input files
+ * @description Creates the database for the specified catalogName/schemaName.
  */
-public class SchemaToolDeleteCreateMojo extends AbstractSchemaToolMojo
+public class SchemaToolCreateDatabaseMojo extends AbstractSchemaToolMojo
 {
-    private static final String OPERATION_MODE_DELETECREATE = "-deletecreate";
+    private static final String OPERATION_MODE_CREATE = "-createDatabase";
 
     /**
      * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
@@ -53,36 +53,30 @@ public class SchemaToolDeleteCreateMojo extends AbstractSchemaToolMojo
     {
         if (fork)
         {
-            cl.createArg().setValue(OPERATION_MODE_DELETECREATE);
-            if (ddlFile != null && ddlFile.trim().length() > 0)
+            cl.createArg().setValue(OPERATION_MODE_CREATE);
+
+            if (catalogName != null && !catalogName.isEmpty())
             {
-                cl.createArg().setValue("-ddlFile");
-                cl.createArg().setValue(ddlFile);
+                cl.createArg().setLine("-catalog " + catalogName);
             }
-            if (completeDdl)
+            if (schemaName != null && !schemaName.isEmpty())
             {
-                cl.createArg().setValue("-completeDdl");
-            }
-            if (includeAutoStart)
-            {
-                cl.createArg().setValue("-includeAutoStart");
+                cl.createArg().setLine("-schema " + schemaName);
             }
         }
         else
         {
-            args.add(OPERATION_MODE_DELETECREATE);
-            if (ddlFile != null && ddlFile.trim().length() > 0)
+            args.add(OPERATION_MODE_CREATE);
+
+            if (catalogName != null && !catalogName.isEmpty())
             {
-                args.add("-ddlFile");
-                args.add(ddlFile);
+                args.add("-catalog");
+                args.add(catalogName);
             }
-            if (completeDdl)
+            if (schemaName != null && !schemaName.isEmpty())
             {
-                args.add("-completeDdl");
-            }
-            if (includeAutoStart)
-            {
-                args.add("-includeAutoStart");
+                args.add("-schema");
+                args.add(schemaName);
             }
         }
     }

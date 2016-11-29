@@ -1,5 +1,5 @@
 /**********************************************************************
-Copyright (c) 2014 Andy Jefferson and others. All rights reserved.
+Copyright (c) 2005 Rahul Thakur and others. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -13,6 +13,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 Contributors:
+2007 Andy Jefferson - split out base class for all enhancer modes.
+2011 Marco หงุ่ยตระกูล-Schulze - changed "@requiresDependencyResolution" to "compile"
     ...
 **********************************************************************/
 package org.datanucleus.maven;
@@ -21,31 +23,24 @@ import java.util.List;
 
 import org.codehaus.plexus.util.cli.Commandline;
 
-/**
- * Generates the schema specified by the "schemaName" parameter.
- * @goal schema-createschema
- * @requiresDependencyResolution runtime
- * @description Creates the datastore schema for the specified schemaName.
- */
-public class SchemaToolCreateSchemaMojo extends AbstractSchemaToolMojo
+public abstract class AbstractEnhancerCheckMojo extends AbstractEnhancerMojo
 {
-    private static final String OPERATION_MODE_CREATE = "-createSchema";
-
     /**
-     * {@inheritDoc}
-     * @see org.datanucleus.maven.AbstractSchemaToolMojo#prepareModeSpecificCommandLineArguments(org.codehaus.plexus.util.cli.Commandline, java.util.List)
+     * Method to add on any additional command line arguments for this mode of invoking the
+     * DataNucleus Enhancer.
+     * @param cl The current CommandLine
+     * @param args Args that will be updated with anything appended here
      */
     protected void prepareModeSpecificCommandLineArguments(Commandline cl, List args)
     {
+        // Use "checkonly" mode
         if (fork)
         {
-            cl.createArg().setValue(OPERATION_MODE_CREATE);
-            cl.createArg().setValue(schemaName);
+            cl.createArg().setValue("-checkonly");
         }
         else
         {
-            args.add(OPERATION_MODE_CREATE);
-            args.add(schemaName);
+            args.add("-checkonly");
         }
     }
 }
