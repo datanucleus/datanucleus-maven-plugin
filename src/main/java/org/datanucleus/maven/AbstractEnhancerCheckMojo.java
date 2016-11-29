@@ -13,7 +13,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 Contributors:
-2007 Andy Jefferson - migrated to JPOX, formatted, etc
+2007 Andy Jefferson - split out base class for all enhancer modes.
+2011 Marco หงุ่ยตระกูล-Schulze - changed "@requiresDependencyResolution" to "compile"
     ...
 **********************************************************************/
 package org.datanucleus.maven;
@@ -22,42 +23,24 @@ import java.util.List;
 
 import org.codehaus.plexus.util.cli.Commandline;
 
-/**
- * Provides a detailed information about the database schema.
- * @goal schema-info
- * @requiresDependencyResolution
- */
-public class SchemaToolInfoMojo extends AbstractSchemaToolMojo
+public abstract class AbstractEnhancerCheckMojo extends AbstractEnhancerMojo
 {
-    private static final String OPERATION_MODE_SCHEMA_INFO = "-schemainfo";
-
     /**
-     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
-     * @required
-     */
-    private List classpathElements;
-
-    @Override
-    List getClasspathElements() {
-        return classpathElements;
-    }
-
-
-
-    /**
-     * {@inheritDoc}
-     * 
-     * @see org.datanucleus.maven.AbstractSchemaToolMojo#prepareModeSpecificCommandLineArguments(org.codehaus.plexus.util.cli.Commandline, java.util.List)
+     * Method to add on any additional command line arguments for this mode of invoking the
+     * DataNucleus Enhancer.
+     * @param cl The current CommandLine
+     * @param args Args that will be updated with anything appended here
      */
     protected void prepareModeSpecificCommandLineArguments(Commandline cl, List args)
     {
+        // Use "checkonly" mode
         if (fork)
         {
-            cl.createArg().setValue(OPERATION_MODE_SCHEMA_INFO);
+            cl.createArg().setValue("-checkonly");
         }
         else
         {
-            args.add(OPERATION_MODE_SCHEMA_INFO);
+            args.add("-checkonly");
         }
     }
 }

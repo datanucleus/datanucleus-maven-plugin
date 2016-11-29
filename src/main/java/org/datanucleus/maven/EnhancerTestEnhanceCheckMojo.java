@@ -13,26 +13,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 Contributors:
-2007 Andy Jefferson - migrated to JPOX, formatted, etc
+ 2016 Dan Haywood - https://github.com/datanucleus/datanucleus-maven-plugin/issues/5
     ...
 **********************************************************************/
 package org.datanucleus.maven;
 
 import java.util.List;
 
-import org.codehaus.plexus.util.cli.Commandline;
-
 /**
- * Provides a detailed information about the database schema.
- * @goal schema-info
- * @requiresDependencyResolution
+ * Goal to check the enhancement status of the provided classes.
+ *
+ * @goal test-enhance-check
+ * @phase process-test-classes
+ * @requiresDependencyResolution test
+ * @description Checks the enhancement of the input classes.
  */
-public class SchemaToolInfoMojo extends AbstractSchemaToolMojo
+public class EnhancerTestEnhanceCheckMojo extends AbstractEnhancerCheckMojo
 {
-    private static final String OPERATION_MODE_SCHEMA_INFO = "-schemainfo";
 
     /**
-     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
+     * @parameter expression="${classpath}" default-value="${project.testClasspathElements}"
      * @required
      */
     private List classpathElements;
@@ -42,22 +42,4 @@ public class SchemaToolInfoMojo extends AbstractSchemaToolMojo
         return classpathElements;
     }
 
-
-
-    /**
-     * {@inheritDoc}
-     * 
-     * @see org.datanucleus.maven.AbstractSchemaToolMojo#prepareModeSpecificCommandLineArguments(org.codehaus.plexus.util.cli.Commandline, java.util.List)
-     */
-    protected void prepareModeSpecificCommandLineArguments(Commandline cl, List args)
-    {
-        if (fork)
-        {
-            cl.createArg().setValue(OPERATION_MODE_SCHEMA_INFO);
-        }
-        else
-        {
-            args.add(OPERATION_MODE_SCHEMA_INFO);
-        }
-    }
 }
