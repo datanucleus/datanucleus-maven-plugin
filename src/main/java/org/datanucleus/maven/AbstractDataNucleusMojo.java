@@ -307,7 +307,17 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
                 }
             }
 
-            URLClassLoader loader = new URLClassLoader(urls, null);
+            ClassLoader parent = null;
+            try
+            {
+                parent = ClassLoader.getPlatformClassLoader();
+                getLog().debug("Java 9 or higher detected. Using modern classloader strategy.");
+            }
+            catch (NoSuchMethodError e)
+            {
+                getLog().debug("Java 8 or older detected. Using legacy classloader strategy.");
+            }
+            URLClassLoader loader = new URLClassLoader(urls, parent);
             Class c = loader.loadClass(className);
             Method m = c.getMethod("main", new Class[] { String[].class });
             ClassLoader tl = Thread.currentThread().getContextClassLoader();
