@@ -310,7 +310,7 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
             ClassLoader parent = null;
             try
             {
-                Method method = ClassLoader.class.getMethod("getPlatformClassLoader", (Class)null);
+                Method method = ClassLoader.class.getMethod("getPlatformClassLoader");
                 parent = (ClassLoader)method.invoke(null);
                 getLog().debug("Java 9 or higher detected. Using modern classloader strategy.");
             }
