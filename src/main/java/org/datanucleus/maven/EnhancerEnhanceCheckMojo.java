@@ -32,7 +32,7 @@ import java.util.List;
 public class EnhancerEnhanceCheckMojo extends AbstractEnhancerCheckMojo
 {
     /**
-     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
+     * @parameter property="classpath" default-value="${project.compileClasspathElements}"
      * @required
      */
     private List classpathElements;

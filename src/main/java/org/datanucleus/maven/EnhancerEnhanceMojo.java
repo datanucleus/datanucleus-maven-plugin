@@ -31,7 +31,7 @@ import java.util.List;
 public class EnhancerEnhanceMojo extends AbstractEnhancerEnhanceMojo 
 {
     /**
-     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
+     * @parameter property="classpath" default-value="${project.compileClasspathElements}"
      * @required
      */
     private List classpathElements;

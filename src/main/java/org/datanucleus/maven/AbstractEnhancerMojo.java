@@ -40,32 +40,32 @@ public abstract class AbstractEnhancerMojo extends AbstractDataNucleusMojo
     private static final String TOOL_NAME_DATANUCLEUS_ENHANCER = "org.datanucleus.enhancer.DataNucleusEnhancer";
 
     /**
-     * @parameter expression="${quiet}" default-value="false"
+     * @parameter property="quiet" default-value="false"
      */
     protected boolean quiet;
 
     /**
-     * @parameter expression="${alwaysDetachable}" default-value="false"
+     * @parameter property="alwaysDetachable" default-value="false"
      */
     protected boolean alwaysDetachable;
 
     /**
-     * @parameter expression="${generatePK}" default-value="true"
+     * @parameter property="generatePK" default-value="true"
      */
     protected boolean generatePK;
 
     /**
-     * @parameter expression="${generateConstructor}" default-value="true"
+     * @parameter property="generateConstructor" default-value="true"
      */
     protected boolean generateConstructor;
 
     /**
-     * @parameter expression="${detachListener}" default-value="false"
+     * @parameter property="detachListener" default-value="false"
      */
     protected boolean detachListener;
 
     /**
-     * @parameter expression="${useFileListFile}" default-value="auto"
+     * @parameter property="useFileListFile" default-value="auto"
      */
     protected String useFileListFile;
 

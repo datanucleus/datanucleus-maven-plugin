@@ -90,46 +90,46 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
     private static final String TOOL_NAME_SCHEMA_TOOL = "org.datanucleus.store.schema.SchemaTool";
 
     /**
-     * @parameter expression="${props}" default-value=""
+     * @parameter property="props" default-value=""
      */
     private String props;
 
     /**
      * Properties that will be passed to the SchemaTool's execution.
-     * @parameter expression="${toolProperties}"
+     * @parameter property="toolProperties"
      */
     private Properties toolProperties;
 
     /**
      * Catalog name (to be used with "createDatabase"/"deleteDatabase" modes).
-     * @parameter expression="${catalogName}" default-value=""
+     * @parameter property="catalogName" default-value=""
      */
     protected String catalogName;
 
     /**
      * Schema name (to be used with "createDatabase"/"deleteDatabase" modes).
-     * @parameter expression="${schemaName}" default-value=""
+     * @parameter property="schemaName" default-value=""
      */
     protected String schemaName;
 
     /**
      * File to which DDL SQL is written.
-     * @parameter expression="${ddlFile}" default-value=""
+     * @parameter property="ddlFile" default-value=""
      */
     protected String ddlFile;
 
     /**
-     * @parameter expression="${completeDdl}" default-value="false"
+     * @parameter property="completeDdl" default-value="false"
      */
     protected boolean completeDdl;
 
     /**
-     * @parameter expression="${includeAutoStart}" default-value="false"
+     * @parameter property="includeAutoStart" default-value="false"
      */
     protected boolean includeAutoStart;
 
     /**
-     * @parameter expression="${classpath}" default-value="${project.compileClasspathElements}"
+     * @parameter property="classpath" default-value="${project.compileClasspathElements}"
      * @required
      */
     private List classpathElements;

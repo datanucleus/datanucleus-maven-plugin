@@ -41,59 +41,59 @@ import java.util.List;
 public abstract class AbstractDataNucleusMojo extends AbstractMojo
 {
     /**
-     * @parameter expression="${metadataDirectory}" default-value="${project.build.outputDirectory}"
+     * @parameter property="metadataDirectory" default-value="${project.build.outputDirectory}"
      * @required
      */
     protected File metadataDirectory;
 
     /**
-     * @parameter expression="${metadataIncludes}" default-value="**\/*.jdo, **\/*.class"
+     * @parameter property="metadataIncludes" default-value="**\/*.jdo, **\/*.class"
      */
     protected String metadataIncludes;
 
     /**
-     * @parameter expression="${metadataExcludes}"
+     * @parameter property="metadataExcludes"
      */
     protected String metadataExcludes;
 
     /**
-     * @parameter expression="${ignoreMetaDataForMissingClasses}" default-value="false"
+     * @parameter property="ignoreMetaDataForMissingClasses" default-value="false"
      */
     protected boolean ignoreMetaDataForMissingClasses;
 
     /**
-     * @parameter expression="${plugin.artifacts}"
+     * @parameter property="plugin.artifacts"
      * @required
      */
     protected List pluginArtifacts;
 
     /**
-     * @parameter expression="${log4jConfiguration}"
+     * @parameter property="log4jConfiguration"
      */
     protected String log4jConfiguration;
 
     /**
-     * @parameter expression="${jdkLogConfiguration}"
+     * @parameter property="jdkLogConfiguration"
      */
     protected String jdkLogConfiguration;
 
     /**
-     * @parameter expression="${verbose}" default-value="false"
+     * @parameter property="verbose" default-value="false"
      */
     protected boolean verbose;
 
     /**
-     * @parameter expression="${fork}" default-value="true"
+     * @parameter property="fork" default-value="true"
      */
     protected boolean fork;
 
     /**
-     * @parameter expression="${persistenceUnitName}" default-value=""
+     * @parameter property="persistenceUnitName" default-value=""
      */
     protected String persistenceUnitName;
 
     /**
-     * @parameter expression="${api}" default-value="JDO"
+     * @parameter property="api" default-value="JDO"
      */
     protected String api;
 

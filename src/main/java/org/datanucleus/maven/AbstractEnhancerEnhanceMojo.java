@@ -24,7 +24,7 @@ import org.codehaus.plexus.util.cli.Commandline;
 public abstract class AbstractEnhancerEnhanceMojo extends AbstractEnhancerMojo
 {
     /**
-     * @parameter expression="${targetDirectory}" default-value=""
+     * @parameter property="targetDirectory" default-value=""
      */
     private String targetDirectory;
 
