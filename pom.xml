@@ -107,7 +107,7 @@
     </build>
 
     <dependencies>
-        <!-- Assumed to be provided by users own POM (along with api-jdo/api-jpa  and any store plugin when using SchemaTool) -->
+        <!-- Assumed to be provided by users own POM (along with api-jdo/api-jpa/api-jakarta, and any store plugin when using SchemaTool) -->
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-core</artifactId>

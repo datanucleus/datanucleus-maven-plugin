@@ -73,6 +73,11 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
     protected String log4jConfiguration;
 
     /**
+     * @parameter property="log4j2Configuration"
+     */
+    protected String log4j2Configuration;
+
+    /**
      * @parameter property="jdkLogConfiguration"
      */
     protected String jdkLogConfiguration;
@@ -152,6 +157,31 @@ public abstract class AbstractDataNucleusMojo extends AbstractMojo
                 }
             }
             return log4jURL;
+        }
+        return null;
+    }
+
+    /**
+     * Accessor for the Log4J2 configuration URL.
+     * @return Log4J2 config URL (if provided)
+     */
+    protected URL getLog4J2Configuration()
+    {
+        if (log4j2Configuration != null)
+        {
+            URL log4j2URL = this.getClass().getResource(log4j2Configuration);
+            if (log4j2URL == null)
+            {
+                try
+                {
+                    log4j2URL = new URL("file:" + log4j2Configuration);
+                }
+                catch (MalformedURLException mue)
+                {
+                    throw new IllegalArgumentException("Log4J2 Configuration is incorrect", mue);
+                }
+            }
+            return log4j2URL;
         }
         return null;
     }

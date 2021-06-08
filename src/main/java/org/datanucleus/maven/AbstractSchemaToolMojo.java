@@ -236,7 +236,7 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
                 }
             }
 
-            // Logging - check for Log4j, else JDK1.4
+            // Logging - check for Log4j, else Log4j2, else JDK1.4
             URL log4jURL = getLog4JConfiguration();
             if (log4jURL != null)
             {
@@ -244,10 +244,18 @@ public abstract class AbstractSchemaToolMojo extends AbstractDataNucleusMojo
             }
             else
             {
-                URL jdkLogURL = getJdkLogConfiguration();
-                if (jdkLogURL != null)
+                URL log4j2URL = getLog4JConfiguration();
+                if (log4j2URL != null)
                 {
-                    cl.createArg().setValue("-Djava.util.logging.config.file=" + jdkLogURL);
+                    cl.createArg().setValue("-Dlog4j.configurationFile=" + log4j2URL);
+                }
+                else
+                {
+                    URL jdkLogURL = getJdkLogConfiguration();
+                    if (jdkLogURL != null)
+                    {
+                        cl.createArg().setValue("-Djava.util.logging.config.file=" + jdkLogURL);
+                    }
                 }
             }
 
