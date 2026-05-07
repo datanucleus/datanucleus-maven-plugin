@@ -1,3 +1,5 @@
 *.iml
 /bin
 /target
+# ignore .idea for idea user
+.idea/
